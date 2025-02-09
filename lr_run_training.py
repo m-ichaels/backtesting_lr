@@ -16,7 +16,7 @@ from sklearn.impute import SimpleImputer
 import math
 
 class LR_training:
-    def __init__(self, model_version, threshold = 0.98, start_date = None, end_date = None):
+    def __init__(self, model_version, threshold = 0.99, start_date = None, end_date = None):
         self.model_version = model_version
         self.threshold = threshold
 
@@ -26,45 +26,15 @@ class LR_training:
             self.end_date = end_date
 
         stocks = [
-    'AAPL', 'MSFT', 'NVDA', 'GOOGL', 'GOOG', 'AMZN', 'META', 'TSLA', 'BRK.B', 'UNH',
-    'V', 'JNJ', 'XOM', 'WMT', 'JPM', 'MA', 'LLY', 'PG', 'HD', 'BAC',
-    'PFE', 'KO', 'DIS', 'CSCO', 'PEP', 'MRK', 'ABT', 'CMCSA', 'ADBE', 'NFLX',
-    'TMO', 'VZ', 'INTC', 'NKE', 'AVGO', 'CRM', 'TXN', 'MCD', 'QCOM', 'HON',
-    'AMD', 'COST', 'AMGN', 'NEE', 'MDT', 'LOW', 'UPS', 'SCHW', 'UNP', 'IBM',
-    'LIN', 'PM', 'ORCL', 'MS', 'RTX', 'INTU', 'CVX', 'SBUX', 'BLK', 'GS',
-    'ISRG', 'CAT', 'AMT', 'PLD', 'DE', 'BKNG', 'SPGI', 'AXP', 'T', 'SYK',
-    'ZTS', 'MDLZ', 'ADP', 'CB', 'NOW', 'LMT', 'GILD', 'DUK', 'MMC', 'CI',
-    'EL', 'GE', 'ADI', 'MO', 'SO', 'BDX', 'PNC', 'USB', 'EW', 'TGT',
-    'C', 'REGN', 'ITW', 'APD', 'MU', 'DHR', 'FIS', 'FISV', 'HUM', 'NSC',
-    'CL', 'SHW', 'BSX', 'EQIX', 'WM', 'EMR', 'D', 'HCA', 'TJX', 'ILMN',
-    'LRCX', 'EOG', 'ETN', 'NOC', 'PGR', 'FCX', 'MCO', 'AON', 'KLAC', 'MRNA',
-    'IDXX', 'AEP', 'PSA', 'TRV', 'CSX', 'KMB', 'ROP', 'MAR', 'NXPI', 'STZ',
-    'SLB', 'CTAS', 'MSCI', 'PH', 'ADM', 'AIG', 'BK', 'MPC', 'CME', 'ORLY',
-    'SRE', 'FTNT', 'CTSH', 'MCK', 'APTV', 'CDNS', 'AZO', 'LHX', 'PAYX', 'DLR',
-    'F', 'WBA', 'ROST', 'ATVI', 'PRU', 'EXC', 'WELL', 'MNST', 'KHC', 'HLT',
-    'IQV', 'SYY', 'SPG', 'CTVA', 'EBAY', 'TT', 'ALL', 'MTD', 'RMD', 'WMB',
-    'OTIS', 'TEL', 'PCAR', 'DLTR', 'BAX', 'PPG', 'HPQ', 'WEC', 'ECL', 'ED',
-    'ROK', 'A', 'ODFL', 'VLO', 'BKR', 'ANET', 'AME', 'FAST', 'GPN', 'TDG',
-    'DOW', 'STT', 'DFS', 'GLW', 'VRSK', 'SWK', 'FITB', 'KEYS', 'HSY', 'ALGN',
-    'KMI', 'DHI', 'NEM', 'WAT', 'MTB', 'VFC', 'CHTR', 'SIVB', 'ZBH', 'AMP',
-    'URI', 'EFX', 'MLM', 'FRC', 'AVB', 'HIG', 'MKC', 'VTR', 'LEN', 'CNC',
-    'RF', 'LUV', 'CBRE', 'CARR', 'TSCO', 'ETSY', 'HES', 'PXD', 'EXPE', 'EQR',
-    'ALB', 'LH', 'BLL', 'AKAM', 'GRMN', 'FMC', 'RSG', 'VRSN', 'HOLX', 'TER',
-    'XYL', 'AEE', 'FE', 'ES', 'CMS', 'DTE', 'PEG', 'AEP', 'LNT', 'WEC',
-    'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP',
-    'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK',
-    'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D',
-    'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE',
-    'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX',
-    'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC',
-    'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP',
-    'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK',
-    'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D',
-    'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE',
-    'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX',
-    'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC',
-    'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP',
-    'LNT', 'WEC', 'XEL', 'EIX', 'PPL']
+    # Dow Jones Industrial Average (DJIA) Components
+    "MMM", "AXP", "BA", "CAT", "CVX", "CSCO", "GS",
+    "HD", "HON", "IBM", "INTC", "MCD", "MRK", "NKE",
+    "CRM", "TRV", "VZ", "WBA", "WMT", "DIS", "XOM",
+
+    # Top 20 S&P 500 Companies by Market Capitalization
+    "AAPL", "MSFT", "AMZN", "GOOGL", "GOOG", "NVDA", "META", "TSLA", "UNH",
+    "JNJ", "JPM", "V", "PG", "MA", "PFE", "ABBV", "KO",
+]
         self.stocks = list(np.unique(stocks))
 
         self.main_df = pd.DataFrame(columns = ['volume', 'normalized_value', '3_reg', '5_reg', '10_reg', '20_reg', 'target'])

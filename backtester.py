@@ -129,5 +129,5 @@ if __name__ == "__main__":
     "JNJ", "JPM", "V", "PG", "MA", "PFE", "ABBV", "KO",
 ]
     stocks = list(np.unique(stocks))
-    back = backtester(stocks, LR_v1_predict, 3000, datetime(2019, 1, 1), datetime(2020, 1, 1), threshold = 0.95, sell_perc = 0.04, stop_perc = 0.03)
+    back = backtester(stocks, LR_v1_predict, 3000, datetime(2023, 1, 1), datetime(2024, 1, 1), threshold = 0.95, sell_perc = 0.04, stop_perc = 0.03)
 back.backtest()

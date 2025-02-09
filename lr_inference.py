@@ -27,7 +27,7 @@ def _threshold(probs, threshold):
 
     return np.array(prob_thresholded)
 
-def LR_v1_predict(stock, start_date, end_date, threshold = 0.98):
+def LR_v1_predict(stock, start_date, end_date, threshold = 0.99):
     """
     This function predicts given the data
     """
