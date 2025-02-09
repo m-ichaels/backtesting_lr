@@ -120,6 +120,7 @@ def create_test_data_lr(stock, start_date = None, end_date = None, n = 10):
     data = data.rename(columns={'Close': 'close', 'Volume': 'volume'})
     cols = ['close', 'volume', 'normalized_value', '3_reg', '5_reg', '10_reg', '20_reg']
     data = data[cols]
+    data.columns = [col[0] if isinstance(col, tuple) else col for col in data.columns]
 
     return data.dropna(axis = 0)
 
@@ -139,8 +140,10 @@ def predict_trend(stock, _model_, start_date = None, end_date = None, n = 10):
     data['pred'] = np.nan
 
     #get data
+    data = data.rename(columns={'Close': 'close', 'Volume': 'volume'})
     cols = ['volume', 'normalized_value', '3_reg', '5_reg', '10_reg', '20_reg']
     x = data[cols]
+    x.columns = [col[0] if isinstance(col, tuple) else col for col in x.columns]
 
     #scale the x data
     scaler = MinMaxScaler()

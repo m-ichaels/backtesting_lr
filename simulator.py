@@ -73,12 +73,13 @@ class simulator:
         for values in self.history:
             net_gain = (values[3] - values[1]) * values[2]
             self.total_gain += net_gain
-            self.history_df = self.history_df.append({'stock': values[0], 'buy_price': values[1], 'n_shares': values[2], 'sell_price': values[3]\
-                 ,'net_gain': net_gain, 'buy_date': values[4], 'sell_date': values[5]}, ignore_index = True)
+            self.history_df = pd.concat([self.history_df, pd.DataFrame([{'stock': values[0], 'buy_price': values[1], 'n_shares': values[2], 'sell_price': values[3]\
+                 ,'net_gain': net_gain, 'buy_date': values[4], 'sell_date': values[5]}])], ignore_index = True)
                     
             if print_results:
-                print("{:<10} {:<10} {:<10} {:<10} {:<10}".format(values[0], values[1], values[2], values[3], np.round(net_gain, 2)))
-            
+                print(values)
+                # print("{:<10} {:<10} {:<10} {:<10} {:<10}".format(values[0], values[1], values[2], values[3], np.round(net_gain, 2)))
+                
     def print_summary(self):
         """
         prints the summary of results
@@ -86,6 +87,7 @@ class simulator:
         self.create_summary(print_results = True)
         print('\n')
         print(f'Initial Balance: {self.initial_capital:.2f}')
+        self.total_gain = self.total_gain[0]
         print(f'Final Balance: {(self.initial_capital + self.total_gain):.2f}')
         print(f'Total gain: {self.total_gain:.2f}')
         print(f'P/L : {(self.total_gain/self.initial_capital)*100:.2f} %')

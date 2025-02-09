@@ -25,7 +25,46 @@ class LR_training:
         if end_date:
             self.end_date = end_date
 
-        stocks = ["SPY"]
+        stocks = [
+    'AAPL', 'MSFT', 'NVDA', 'GOOGL', 'GOOG', 'AMZN', 'META', 'TSLA', 'BRK.B', 'UNH',
+    'V', 'JNJ', 'XOM', 'WMT', 'JPM', 'MA', 'LLY', 'PG', 'HD', 'BAC',
+    'PFE', 'KO', 'DIS', 'CSCO', 'PEP', 'MRK', 'ABT', 'CMCSA', 'ADBE', 'NFLX',
+    'TMO', 'VZ', 'INTC', 'NKE', 'AVGO', 'CRM', 'TXN', 'MCD', 'QCOM', 'HON',
+    'AMD', 'COST', 'AMGN', 'NEE', 'MDT', 'LOW', 'UPS', 'SCHW', 'UNP', 'IBM',
+    'LIN', 'PM', 'ORCL', 'MS', 'RTX', 'INTU', 'CVX', 'SBUX', 'BLK', 'GS',
+    'ISRG', 'CAT', 'AMT', 'PLD', 'DE', 'BKNG', 'SPGI', 'AXP', 'T', 'SYK',
+    'ZTS', 'MDLZ', 'ADP', 'CB', 'NOW', 'LMT', 'GILD', 'DUK', 'MMC', 'CI',
+    'EL', 'GE', 'ADI', 'MO', 'SO', 'BDX', 'PNC', 'USB', 'EW', 'TGT',
+    'C', 'REGN', 'ITW', 'APD', 'MU', 'DHR', 'FIS', 'FISV', 'HUM', 'NSC',
+    'CL', 'SHW', 'BSX', 'EQIX', 'WM', 'EMR', 'D', 'HCA', 'TJX', 'ILMN',
+    'LRCX', 'EOG', 'ETN', 'NOC', 'PGR', 'FCX', 'MCO', 'AON', 'KLAC', 'MRNA',
+    'IDXX', 'AEP', 'PSA', 'TRV', 'CSX', 'KMB', 'ROP', 'MAR', 'NXPI', 'STZ',
+    'SLB', 'CTAS', 'MSCI', 'PH', 'ADM', 'AIG', 'BK', 'MPC', 'CME', 'ORLY',
+    'SRE', 'FTNT', 'CTSH', 'MCK', 'APTV', 'CDNS', 'AZO', 'LHX', 'PAYX', 'DLR',
+    'F', 'WBA', 'ROST', 'ATVI', 'PRU', 'EXC', 'WELL', 'MNST', 'KHC', 'HLT',
+    'IQV', 'SYY', 'SPG', 'CTVA', 'EBAY', 'TT', 'ALL', 'MTD', 'RMD', 'WMB',
+    'OTIS', 'TEL', 'PCAR', 'DLTR', 'BAX', 'PPG', 'HPQ', 'WEC', 'ECL', 'ED',
+    'ROK', 'A', 'ODFL', 'VLO', 'BKR', 'ANET', 'AME', 'FAST', 'GPN', 'TDG',
+    'DOW', 'STT', 'DFS', 'GLW', 'VRSK', 'SWK', 'FITB', 'KEYS', 'HSY', 'ALGN',
+    'KMI', 'DHI', 'NEM', 'WAT', 'MTB', 'VFC', 'CHTR', 'SIVB', 'ZBH', 'AMP',
+    'URI', 'EFX', 'MLM', 'FRC', 'AVB', 'HIG', 'MKC', 'VTR', 'LEN', 'CNC',
+    'RF', 'LUV', 'CBRE', 'CARR', 'TSCO', 'ETSY', 'HES', 'PXD', 'EXPE', 'EQR',
+    'ALB', 'LH', 'BLL', 'AKAM', 'GRMN', 'FMC', 'RSG', 'VRSN', 'HOLX', 'TER',
+    'XYL', 'AEE', 'FE', 'ES', 'CMS', 'DTE', 'PEG', 'AEP', 'LNT', 'WEC',
+    'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP',
+    'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK',
+    'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D',
+    'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE',
+    'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX',
+    'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC',
+    'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP',
+    'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK',
+    'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D',
+    'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX', 'PPL', 'SRE',
+    'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC', 'XEL', 'EIX',
+    'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP', 'LNT', 'WEC',
+    'XEL', 'EIX', 'PPL', 'SRE', 'ED', 'D', 'SO', 'DUK', 'NEE', 'AEP',
+    'LNT', 'WEC', 'XEL', 'EIX', 'PPL']
         self.stocks = list(np.unique(stocks))
 
         self.main_df = pd.DataFrame(columns = ['volume', 'normalized_value', '3_reg', '5_reg', '10_reg', '20_reg', 'target'])
@@ -46,7 +85,8 @@ class LR_training:
         for stock in self.stocks:
             try:
                 df = stock_utils.create_train_data(stock, n = 10)
-                self.main_df = pd.concat([self.main_df, df])
+                df.columns = [col[0] if isinstance(col, tuple) else col for col in df.columns]
+                self.main_df = pd.concat([self.main_df, df], axis = 0, ignore_index = True)
             except:
                 pass
         print(f'{len(self.main_df)} samples were fetched from the database.')
@@ -56,13 +96,10 @@ class LR_training:
         create train and test data
         """
         self.main_df = self.main_df.sample(frac = 1, random_state = 3). reset_index(drop = True)
-        print(self.main_df.columns)
         self.main_df = self.main_df.dropna(axis=1, how='all')
-        print(self.main_df.columns)
+        self.main_df = self.main_df.dropna()
         self.main_df.columns = [col[0] if isinstance(col, tuple) else col for col in self.main_df.columns]
-        print(self.main_df.columns)
         self.main_df['target'] = self.main_df['target'].astype('category')
-        print(self.main_df)
         self.main_df.columns = self.main_df.columns.astype(str)
 
         y = self.main_df.pop('target').to_numpy()
@@ -114,7 +151,7 @@ class LR_training:
         pickle.dump(self.scaler, open(scaler_dir, 'wb'))
 
         print(f'Saved the model and scaler in {saved_models_dir}')
-        cm_path = os.path.join(os.getcwd(), 'results\Confusion Matrices')
+        cm_path = os.path.join(os.getcwd(), 'confusion_matrices')
         
         #save cms
         plt.figure()
