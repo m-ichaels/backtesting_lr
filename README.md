@@ -2,14 +2,12 @@
 # find out how to graph the local minima vs maxima points (recorded as well as predictions, on two separate graphs, obviously)
 
 Task list:
-Save this repository, and clone it to save all of the work I have done.
-On the cloned verious, work with one stock (GS, for instance). With this stock, write code to visualise where the minima and maxima are.
-Then, train the model, and produce another graph to see where the buy signals are (just to check that I am doing it correctly).
+(done) Save this repository, and clone it to save all of the work I have done.
+(done) On the cloned verious, work with one stock (GS, for instance). With this stock, write code to visualise where the minima and maxima are.
+(done) Then, train the model, and produce another graph to see where the buy signals are (just to check that I am doing it correctly).
 Next up, use reinforcement learning to find the optimum parameters (threshold, hold_till etc.).
 After this, learn and see if I can input the LSTM model that I made previously to achieve a higher prediction accuracy than logistic regression.
 Then figure out the stop loss can be best used.
-
-
 
 
 How this works.

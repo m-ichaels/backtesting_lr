@@ -119,14 +119,7 @@ class backtester(simulator):
 
 if __name__ == "__main__":
     stocks = [
-    # Dow Jones Industrial Average (DJIA) Components
-    "MMM", "AXP", "BA", "CAT", "CVX", "CSCO", "GS",
-    "HD", "HON", "IBM", "INTC", "MCD", "MRK", "NKE",
-    "CRM", "TRV", "VZ", "WBA", "WMT", "DIS", "XOM",
-
-    # Top 20 S&P 500 Companies by Market Capitalization
-    "AAPL", "MSFT", "AMZN", "GOOGL", "GOOG", "NVDA", "META", "TSLA", "UNH",
-    "JNJ", "JPM", "V", "PG", "MA", "PFE", "ABBV", "KO",
+    "GS"   
 ]
     stocks = list(np.unique(stocks))
     back = backtester(stocks, LR_v1_predict, 3000, datetime(2023, 1, 1), datetime(2024, 1, 1), threshold = 0.95, sell_perc = 0.04, stop_perc = 0.03)

@@ -5,6 +5,7 @@ import pandas as pd
 from scipy.signal import argrelextrema
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+import matplotlib.pyplot as plt
 
 def timestamp(dt):
     epoch = datetime.fromtimestamp(0, tz=timezone.utc)  # Corrected for timezone awareness
@@ -70,6 +71,7 @@ def get_data(stock, start_date = None, end_date = None, n = 10):
     data = yf.download(stock, start=start_date, end=end_date)
     data.reset_index(inplace=True)
     data =pd.DataFrame(data)
+
     #add the noramlzied value function and create a new column
     data['normalized_value'] = data.apply(lambda x: normalized_values(x['High'], x['Low'], x['Close']), axis = 1)
     #column with local minima and maxima
@@ -97,10 +99,12 @@ def create_train_data(stock, start_date = None, end_date = None, n = 10):
     
     #create a dummy variable for local_min (0) and max (1)
     _data_['target'] = [1 if x > 0 else 0 for x in _data_['loc_max']]
+
     #columns of interest
     _data_ = _data_.rename(columns={'Close': 'close', 'Volume': 'volume'})
     cols_of_interest = ['volume', 'normalized_value', '3_reg', '5_reg', '10_reg', '20_reg', 'target']
     _data_ = _data_[cols_of_interest]
+
     return _data_.dropna(axis = 0)
 
 def create_test_data_lr(stock, start_date = None, end_date = None, n = 10):

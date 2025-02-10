@@ -27,13 +27,7 @@ class LR_training:
 
         stocks = [
     # Dow Jones Industrial Average (DJIA) Components
-    "MMM", "AXP", "BA", "CAT", "CVX", "CSCO", "GS",
-    "HD", "HON", "IBM", "INTC", "MCD", "MRK", "NKE",
-    "CRM", "TRV", "VZ", "WBA", "WMT", "DIS", "XOM",
-
-    # Top 20 S&P 500 Companies by Market Capitalization
-    "AAPL", "MSFT", "AMZN", "GOOGL", "GOOG", "NVDA", "META", "TSLA", "UNH",
-    "JNJ", "JPM", "V", "PG", "MA", "PFE", "ABBV", "KO",
+    "GS" 
 ]
         self.stocks = list(np.unique(stocks))
 
