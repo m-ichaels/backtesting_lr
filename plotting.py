@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from stock_utils import get_data
 import os
 
-def plot_stock_price(stock='SPY', start_date=None, end_date=None, n=10):
+def plot_stock_price(stock='GS', start_date = datetime(2023, 1, 1), end_date = datetime(2024, 1, 1), n=10):
     """
     Fetches stock data and plots the closing price against time.
     """

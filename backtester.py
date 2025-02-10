@@ -9,7 +9,7 @@ import numpy as np
 
 class backtester(simulator):
 
-    def __init__(self, stocks_list, model, capital, start_date, end_date, threshold = 0.95, sell_perc = 0.04, hold_till = 21, stop_perc = 0.003):
+    def __init__(self, stocks_list, model, capital, start_date, end_date, threshold = 0.99, sell_perc = 0.04, hold_till = 21, stop_perc = 0.003, sell_threshold = 0.02):
 
         super().__init__(capital)
 
@@ -23,6 +23,7 @@ class backtester(simulator):
         self.sell_perc = sell_perc
         self.hold_till = hold_till
         self.stop_perc = stop_perc
+        self.sell_threshold = sell_threshold
 
         current_dir = os.getcwd()
         results_dir = os.path.join(current_dir, 'results')
@@ -57,7 +58,7 @@ class backtester(simulator):
             else:
                 stocks = [key for key in self.buy_orders.keys()]
                 for s in stocks:
-                    recommended_action, current_price = LR_v1_sell(s, self.buy_orders[s][3], self.buy_orders[s][0], self.day, self.sell_perc, self.hold_till, self.stop_perc)
+                    recommended_action, current_price = LR_v1_sell(s, self.buy_orders[s][3], self.buy_orders[s][0], self.day, self.sell_perc, self.hold_till, self.stop_perc, self.sell_threshold)
                 if recommended_action == "SELL":
                     print(f'Sold {s} for {current_price} on {self.day}')
                     self.sell(s, current_price, self.buy_orders[s][1], self.day)    
@@ -119,8 +120,8 @@ class backtester(simulator):
 
 if __name__ == "__main__":
     stocks = [
-    "GS"   
+    "GS"
 ]
     stocks = list(np.unique(stocks))
-    back = backtester(stocks, LR_v1_predict, 3000, datetime(2023, 1, 1), datetime(2024, 1, 1), threshold = 0.95, sell_perc = 0.04, stop_perc = 0.03)
+    back = backtester(stocks, LR_v1_predict, 3000, datetime(2023, 1, 1), datetime(2024, 1, 1), threshold = 0.99, sell_perc = 0.04, stop_perc = 0.03, sell_threshold = 0.02)
 back.backtest()
