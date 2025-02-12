@@ -27,7 +27,9 @@ class LR_training:
 
         stocks = [
     # Dow Jones Industrial Average (DJIA) Components
-    "GS" 
+    "AAPL", "AMGN", "AXP", "BA", "CAT", "CRM", "CSCO", "CVX", "DIS", "DOW",
+    "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM",
+    "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "V", "VZ", "WBA", "WMT"
 ]
         self.stocks = list(np.unique(stocks))
 

@@ -9,7 +9,7 @@ import numpy as np
 
 class backtester(simulator):
 
-    def __init__(self, stocks_list, model, capital, start_date, end_date, threshold = 0.99, sell_perc = 0.04, hold_till = 21, stop_perc = 0.003, sell_threshold = 0.02):
+    def __init__(self, stocks_list, model, capital, start_date, end_date, threshold = 0.99, sell_perc = 0.08, hold_till = 21, stop_perc = 0.003, sell_threshold = 0.02):
 
         super().__init__(capital)
 
@@ -120,8 +120,10 @@ class backtester(simulator):
 
 if __name__ == "__main__":
     stocks = [
-    "GS"
+    "AAPL", "AMGN", "AXP", "BA", "CAT", "CRM", "CSCO", "CVX", "DIS", "DOW",
+    "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM",
+    "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "V", "VZ", "WBA", "WMT"
 ]
     stocks = list(np.unique(stocks))
-    back = backtester(stocks, LR_v1_predict, 3000, datetime(2023, 1, 1), datetime(2024, 1, 1), threshold = 0.99, sell_perc = 0.04, stop_perc = 0.03, sell_threshold = 0.02)
+    back = backtester(stocks, LR_v1_predict, 3000, datetime(2015, 1, 1), datetime(2025, 1, 1), threshold = 0.99, sell_perc = 0.04, stop_perc = 0.03, sell_threshold = 0.02)
 back.backtest()
