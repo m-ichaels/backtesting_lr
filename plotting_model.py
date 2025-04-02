@@ -7,12 +7,12 @@ import numpy as np
 
 def main():
     # Configuration parameters
-    stock = "GS"
-    threshold = 0.99       # threshold parameter to pass to LR_v1_predict
-    sell_threshold = 0.02  # threshold for sell signal
+    stock = "EURGBP=X"
+    threshold = 0.92       # threshold parameter to pass to LR_v1_predict
+    sell_threshold = 0.08  # threshold for sell signal
     back_to_days = 40      # number of days to look back for the model input
-    start_date = datetime(2023, 1, 1)
-    end_date = datetime(2024, 1, 1)
+    start_date = datetime(2024, 4, 1)
+    end_date = datetime(2025, 4, 1)
 
     # Lists to hold data for plotting
     dates = []
