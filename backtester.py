@@ -120,27 +120,8 @@ class backtester(simulator):
 
 if __name__ == "__main__":
     stocks = [
-    "EURUSD=X",
-    "GBPUSD=X",
-    "USDJPY=X",
-    "USDCHF=X",
-    "AUDUSD=X",
-    "USDCAD=X",
-    "NZDUSD=X",
-    "EURGBP=X",
-    "EURJPY=X",
-    "GBPJPY=X",
-    "EURCHF=X",
-    "AUDJPY=X",
-    "CADJPY=X",
-    "EURAUD=X",
-    "EURCAD=X",
-    "AUDNZD=X",
-    "USDSEK=X",
-    "USDMXN=X",
-    "USDZAR=X",
-    "USDSGD=X"
+    "GBPUSD=X"
 ]
     stocks = list(np.unique(stocks))
-    back = backtester(stocks, LR_v1_predict, 3000, datetime(2018, 4, 1), datetime(2019, 4, 1), threshold = 0.92, sell_perc = 0.04, stop_perc = 0.03, sell_threshold = 0.02)
+    back = backtester(stocks, LR_v1_predict, 3000, datetime(2004, 4, 1), datetime(2025, 4, 1), threshold = 0.92, sell_perc = 0.04, stop_perc = 0.03, sell_threshold = 0.02)
 back.backtest()

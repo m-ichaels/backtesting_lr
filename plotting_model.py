@@ -4,15 +4,16 @@ from datetime import datetime, timedelta
 from lr_inference import LR_v1_predict
 from tqdm import tqdm
 import numpy as np
+from stock_utils import get_data
 
-def main():
+def main(stock='GBPUSD=X', start_date=datetime(2024, 1, 1), end_date=datetime(2025, 1, 1), n=10):
     # Configuration parameters
-    stock = "EURGBP=X"
+    stock = "GBPUSD=X"
     threshold = 0.92       # threshold parameter to pass to LR_v1_predict
     sell_threshold = 0.08  # threshold for sell signal
     back_to_days = 40      # number of days to look back for the model input
-    start_date = datetime(2024, 4, 1)
-    end_date = datetime(2025, 4, 1)
+    start_date = datetime(2024, 1, 1)
+    end_date = datetime(2025, 1, 1)
 
     # Lists to hold data for plotting
     dates = []
@@ -34,27 +35,25 @@ def main():
             prediction, prediction_thresholded, close_price = LR_v1_predict(
                 stock, period_start, current_day, threshold
             )
-            # Record the close price for this day
+            
+            # Only add to the lists if we successfully got data (no exception)
             dates.append(current_day)
             close_prices.append(close_price)
 
-            # Check if a buy signal is generated.
-            # In your model a buy signal is when prediction_thresholded is less than 1.
+            # Check if a buy signal is generated
             if prediction_thresholded < 1:
                 buy_signal_dates.append(current_day)
                 buy_signal_prices.append(close_price)
             
-            # Check if a sell signal is generated.
-            # We mark a sell signal if the raw prediction is below sell_threshold.
+            # Check if a sell signal is generated
             if prediction < sell_threshold:
                 sell_signal_dates.append(current_day)
                 sell_signal_prices.append(close_price)
 
         except Exception as e:
-            print(f"Error processing {current_day.strftime('%Y-%m-%d')}: {e}")
-            # Append NaN if there was an error (e.g. missing data on non-trading days)
-            dates.append(current_day)
-            close_prices.append(np.nan)
+            # Skip dates with errors (likely non-trading days)
+            # Don't add NaN values to the lists
+            print(f"Skipping {current_day.strftime('%Y-%m-%d')}: {e}")
 
         # Move to the next day
         current_day += timedelta(days=1)
@@ -81,8 +80,12 @@ def main():
     plt.savefig(plot_path)
     print(f"Plot saved to {plot_path}")
 
-    # Optionally, display the plot (remove if not needed)
+    # Optionally, display the plot
     plt.show()
+
+    # data, idxs_with_mins, idxs_with_maxs = get_data(stock, start_date, end_date, n)
+    # print(buy_signal_dates)
+    # print(sell_signal_dates)
 
 if __name__ == "__main__":
     main()
